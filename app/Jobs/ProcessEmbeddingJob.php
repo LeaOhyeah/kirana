@@ -57,7 +57,7 @@ class ProcessEmbeddingJob implements ShouldQueue
         // Siapkan teks dari data yang baru kita ambil
         $textToEmbed = $destination->title . ". " . $destination->desc;
 
-        $embeddingServiceUrl = 'https://embedding-service-40186349061.asia-southeast2.run.app/generate-embedding';
+        $embeddingServiceUrl = 'http://127.0.0.1:8002/generate-embedding';
 
         try {
             Log::info("Memulai job embedding untuk destinasi ID: {$destination->id}");

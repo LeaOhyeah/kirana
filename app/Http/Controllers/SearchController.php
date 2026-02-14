@@ -72,7 +72,7 @@ class SearchController extends Controller
      */
     private function getEmbeddingForQuery(string $query): array
     {
-        $embeddingServiceUrl = 'https://embedding-service-40186349061.asia-southeast2.run.app/generate-embedding';
+        $embeddingServiceUrl = 'http://127.0.0.1:8002/generate-embedding';
         $response = Http::timeout(10)->post($embeddingServiceUrl, ['text' => $query]);
 
         if (!$response->successful() || $response->json('status') !== 'success') {

@@ -12,7 +12,7 @@
      <div class="container px-4 py-3 d-flex justify-content-between align-items-center">
 
          <!-- Judul Website -->
-         <a class="navbar-brand text-dark font-weight-bold" href="index.html" style="font-size: 1.5rem;">
+         <a class="navbar-brand text-dark font-weight-bold" href="#" style="font-size: 1.5rem;">
              PesonaBali
          </a>
 
