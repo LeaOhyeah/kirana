@@ -631,24 +631,28 @@
                 // FUNGSI-FUNGSI UTAMA (Tidak ada perubahan signifikan di sini)
                 // ========================================================
 
+                // ... kode sebelumnya ...
+
                 async function askTheGuide(promptText) {
                     aiStatusText.textContent = 'AI is thinking...';
                     const aiBubble = createAiPlaceholderBubble();
 
+                    // PERUBAHAN DI SINI:
+                    // Kita tidak lagi mengirim object 'context' yang berisi teks panjang.
+                    // Kita hanya mengirim 'destination_id' dan 'prompt'.
                     const payload = {
                         prompt: promptText,
-                        context: {
-                            title: destinationTitle,
-                            description: destinationDesc
-                        }
+                        // Blade akan mencetak ID destinasi langsung ke dalam script JS
+                        destination_id: "{{ $destination->id }}"
                     };
 
                     try {
-                        // Ganti URL ini dengan URL API Anda yang sebenarnya
-                        const response = await fetch('http://127.0.0.1:8001/voice-process', {
+                        const response = await fetch("{{ route('ai.ask') }}", {
                             method: 'POST',
                             headers: {
-                                'Content-Type': 'application/json'
+                                'Content-Type': 'application/json',
+                                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')
+                                    .getAttribute('content')
                             },
                             body: JSON.stringify(payload)
                         });
@@ -674,10 +678,11 @@
 
                     } catch (error) {
                         console.error('Error calling API:', error);
-                        fillAiBubble(aiBubble,
-                            'Oops, there seems to be a connection issue.');
+                        fillAiBubble(aiBubble, 'Oops, there seems to be a connection issue.');
                     }
                 }
+
+                // ... kode setelahnya ...
 
                 function addBubbleToChat(text, sender) {
                     const bubble = document.createElement('div');
